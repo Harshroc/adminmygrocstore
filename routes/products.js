@@ -1,9 +1,9 @@
 const express = require('express');
 var router = express.Router();
 const multer  = require('multer');
-const { check, validationResult } = require('express-validator');
-const categoriesModel = require('../models/categories');
-const productsModel = require('../models/products');
+const { check } = require('express-validator');
+
+const productController = require('../controller/product');
 
 const multerStorage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -25,10 +25,9 @@ const multerFilter = (req, file, cb) => {
 
 const upload = multer({
     storage: multerStorage,
+    limits : {fileSize: 1024 * 1024 * 5 },
     fileFilter: multerFilter,
   });
-
-
 
 router.post('/', [check('categoryId', 'Please Select Category')
 .isEmpty(),
@@ -40,68 +39,10 @@ check('productMrp', 'Please Enter Product MRP')
 .isEmpty(),
 check('productRsp', 'Please Enter Product RSP')
 .isEmpty(),
-],upload.single('productUpload'), async (req, res, next) => {
+],upload.single('productUpload'), productController.addProductAction);
 
-const errors = validationResult(req);
+router.get('/', productController.addProduct);
 
-    if(!errors.isEmpty()) {
-        const alert = errors.array();
-        res.render('addproducts', { alert, urls: "addproducts" });
-    }
-    else
-    {
-        try
-        {
-            const products = new productsModel({
-                productName : req.body.productName,
-                productDesc : req.body.productDesc,
-                productImage : req.file.filename,
-                productMrp : req.body.productMrp,
-                productRsp : req.body.productRsp,
-                productCategory : req.body.categoryId,
-            });
-    
-            products.save((err, response) => {
-                
-                categoriesModel.find({}).select('_id categoryName').then((category) =>{
-                    res.render('addproducts', { urls: "addproducts", categorylist: category,  });
-                  })                
-              });
-        }
-        catch(ex)
-        {
-            return next(ex);
-        }
-        
-    }
-    
-});
-
-router.get('/', function(req, res, next) {
-    categoriesModel.find({}).select('_id categoryName').then((category) =>{
-      res.render('addproducts', { urls: "addproducts", categorylist: category  });
-    }).catch((error) => {
-      res.status(500).send(error);
-    });
-    
-  });
-
-//   console.log(`${request.protocol}://${request.headers.host}`);
-  
-  router.get('/listproducts', (req, res, next) => {
-      
-    
-    productsModel.find().then((product) =>{
-        res.render('listproducts', { urls: "listproducts", productlist: product  });
-      }).catch((error) => {
-        res.status(500).send(error);
-      });
-  })
-
-// router.get('/handleaddproducts', function(req, res, next) {
-//   res.render('addproducts', { urls: "addproducts"  });
-// });
-
-  
+router.get('/listproducts', productController.getProduct);
 
 module.exports = router;

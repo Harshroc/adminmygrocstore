@@ -23,16 +23,15 @@ const productsSchema = new mongoose.Schema({
         required: [true, "Please Enter Product RSP"],
     },
     productCategory: {
-        type: String,
-        required: [true, "Please Enter Product RSP"],
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Categories',
+        required: [true],
     },
     productCreatedTime: {
         type: Date,
         default: Date.now
     },
-    productCategoryId: {
-        type: mongoose.productsSchema.Types.ObjectId, ref: 'Categories',
-    }
+    
 
 });
 

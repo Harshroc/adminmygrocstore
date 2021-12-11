@@ -6,11 +6,4 @@ router.get('/', function(req, res, next) {
   res.render('addcategories', { urls: ""  });
 });
 
-
-
-
-
-
-
-
 module.exports = router;

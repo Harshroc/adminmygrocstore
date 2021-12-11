@@ -15,7 +15,7 @@
                 </a>    
             </li> -->
             <li class="sub-menu">
-              <% if(url === "addcategories" || url === "listcategories" || url === "") { %> 
+              <% if(url === "categories" || url === "listcategories" || url === "" || url === "addcategories") { %> 
               <a href="javascript:;" class="active">
                 <%} else { %>
               <a href="javascript:;">                  
@@ -31,7 +31,7 @@
             </li>
            
             <li class="sub-menu">
-              <% if(url === "addproducts") { %> 
+              <% if(url === "products" || url === "listproducts" || url === "addproducts") { %> 
                 <a href="javascript:;" class="active">
                   <%} else { %>
                 <a href="javascript:;">                  

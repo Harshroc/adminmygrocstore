@@ -33,7 +33,7 @@
                           <% let i=1; productlist.forEach(function (product) { %>
                             <tr>
                                 <td><%= i %></td>
-                                <td><%= product._id %></td>
+                                <td><%= product.productCategory.categoryName %></td>
                                 <td><%= product.productName %></td>
                                 <td><%= product.productDesc %></td>
                                 <td><img style="height: 100px;width: auto;" src="/images/products/<%= product.productImage %>" /></td>

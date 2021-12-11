@@ -13,7 +13,11 @@ const categoriesSchema = new mongoose.Schema({
     categoryImage: {
         type: String,
         required: [true, "Uploaded file must have a name"]
-    }
+    },
+    categoryCreatedTime: {
+        type: Date,
+        default: Date.now
+    },
 
 });
 
