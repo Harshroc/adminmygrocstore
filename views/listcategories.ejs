@@ -1,0 +1,61 @@
+<%- include('header', { url: urls })  %>
+
+<%- include('sidebar', { url: urls }) %>
+
+    
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i>  Categories List</h3>
+        <div class="row mt">
+          <!--  DATE PICKERS -->
+          <div class="col-lg-12">
+            <div class="content-panel">
+                <div class="adv-table" style="padding: 10px 20px 0px 20px;overflow: scroll;">
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Sr. No</th>
+                                <th>Category Name</th>
+                                <th>Category Description</th>
+                                <th>Image</th>
+                                <th>Actions</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <% let i=1; categorylist.forEach(function (category) { %>
+                            <tr>
+                                <td><%= i %></td>
+                                <td><%= category.categoryName %></td>
+                                <td><%= category.categoryDesc %></td>
+                                <td><img style="height: 100px;width: auto;" src="/images/categories/<%= category.categoryImage %>" /></td>
+                                <td>Update | Delete</td>
+                             
+                            </tr>
+                            <% i++ }) %>
+                            
+                            
+                        </tfoot>
+                    </table>
+                </div>
+              </div>            
+            <!-- /form-panel -->
+           
+          </div>
+          <!-- /col-lg-12 -->
+        </div>
+        <!-- /row -->
+        
+        </div>
+        <!-- row -->
+      </section>
+      <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+
+    <%- include('footer', { url: urls }) %>

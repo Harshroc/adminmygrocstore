@@ -1,0 +1,63 @@
+<!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu" id="nav-accordion">
+            
+            <h3 style="color:white" class="centered">Welcome! Admin</h3>
+            <!-- <li class="mt">
+              <a href="/dashboard">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+                </a>    
+            </li> -->
+            <li class="sub-menu">
+              <% if(url === "addcategories" || url === "listcategories" || url === "") { %> 
+              <a href="javascript:;" class="active">
+                <%} else { %>
+              <a href="javascript:;">                  
+                  <% } %>
+                    <i class="fa fa-cogs"></i>
+                    <!-- <i class="fa fa-cogs "></i> -->
+                <span>Categories</span>
+                </a>
+              <ul class="sub">
+                <li><a href="/categories">Add Categories</a></li>
+                <li><a href="/categories/listcategories">List Categories</a></li>          
+              </ul>
+            </li>
+           
+            <li class="sub-menu">
+              <% if(url === "addproducts") { %> 
+                <a href="javascript:;" class="active">
+                  <%} else { %>
+                <a href="javascript:;">                  
+                    <% } %>
+                <i class="fa fa-desktop"></i>
+                <span>Products</span>
+                </a>
+              <ul class="sub">
+                <li><a href="/products">Add Products</a></li>
+                <li><a href="/products/listproducts">List Products</a></li>
+              </ul>
+            </li>
+
+            <li class="sub-menu">
+                <a href="javascript:;">
+                  <i class="fa fa-desktop"></i>
+                  <span>Orders</span>
+                  </a>
+                <ul class="sub">
+                  <li><a href="/vieworders">View Orders</a></li>                  
+                </ul>
+              </li>
+           
+           
+          </ul>
+          <!-- sidebar menu end-->
+        </div>
+      </aside>
+      <!--sidebar end-->
