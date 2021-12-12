@@ -14,10 +14,11 @@ exports.addProductAction = async (req, res, next) => {
         {
             try
             {
+                const filepath = process.env.base_path+req.file.path.split('/').slice(1).join('/');
                 const products = new productsModel({
                     productName : req.body.productName,
                     productDesc : req.body.productDesc,
-                    productImage : req.file.filename,
+                    productImage : filepath,
                     productMrp : req.body.productMrp,
                     productRsp : req.body.productRsp,
                     productCategory : req.body.categoryId,

@@ -4,7 +4,7 @@ const { validationResult } = require('express-validator');
 
 
 exports.addCategory =  async (req, res, next) => {
-
+    
     const errors = validationResult(req);
     
         if(!errors.isEmpty()) {
@@ -15,12 +15,15 @@ exports.addCategory =  async (req, res, next) => {
         {
             try
             {
+                
+                const filepath = process.env.base_path+req.file.path.split('/').slice(1).join('/');
+                
                 const categories = new categoriesModel({
                     categoryName : req.body.categoryName,
                     categoryDesc : req.body.categoryDesc,
-                    categoryImage : req.file.path,
+                    categoryImage : filepath,
                 });
-        
+                
                 categories.save((err, response) => {
                     // if(err) throw err;
                     res.render('addcategories', { err, urls: "addcategories" });
