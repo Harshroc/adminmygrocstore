@@ -1,13 +1,29 @@
+require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
-const url = 'mongodb://localhost/mygrocstore';
+// const url = 'mongodb://localhost/mygrocstore';
+const url = 'mongodb+srv://harshroc:0qj9LZRSXiB5tzjw@cluster0.ednoc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+// const connectionParams={
+//   useNewUrlParser: true,
+//   useCreateIndex: true,
+//   useUnifiedTopology: true 
+// }
+
 mongoose.connect(url)
+    .then( () => {
+        console.log('Connected to database ')
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. \n${err}`);
+    })
+
+// mongoose.connect(url)
 
 const contt = mongoose.connection;
 
@@ -18,6 +34,8 @@ contt.on('open', () => {
 var indexRouter = require('./routes/index');
 var categoriesRouter = require('./routes/categories');
 var productsRouter = require('./routes/products');
+var usersRouter = require('./api/routes/users');
+var getCategoriesRouter = require('./api/routes/categories');
 
 var app = express();
 
@@ -39,12 +57,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/categories', categoriesRouter);
-app.use('/categories/listcategories', categoriesRouter);
-app.use('/handleaddcategories', categoriesRouter);
 app.use('/products', productsRouter);
-app.use('/handleaddproducts', productsRouter);
-app.use('/products/listproducts', productsRouter);
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers",
+  "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  if(req.method === "OPTIONS")
+  {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE");
+    return res.status(200).json({});
+  }
+  next();
+});
+
+app.use('/users', usersRouter);
+app.use('/api/getcategories', getCategoriesRouter);
 
 
 // catch 404 and forward to error handler

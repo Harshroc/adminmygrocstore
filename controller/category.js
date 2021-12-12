@@ -18,7 +18,7 @@ exports.addCategory =  async (req, res, next) => {
                 const categories = new categoriesModel({
                     categoryName : req.body.categoryName,
                     categoryDesc : req.body.categoryDesc,
-                    categoryImage : req.file.filename,
+                    categoryImage : req.file.path,
                 });
         
                 categories.save((err, response) => {

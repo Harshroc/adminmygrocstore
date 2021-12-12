@@ -28,7 +28,7 @@ const upload = multer({
 });
 
 
-router.post('/', [check('categoryName', 'Please Enter Username')
+router.post('/handleaddcategories', [check('categoryName', 'Please Enter Username')
 .isEmpty(),
 check('categoryDesc', 'Please Enter Description')
 .isEmpty(),

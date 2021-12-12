@@ -29,7 +29,7 @@ const upload = multer({
     fileFilter: multerFilter,
   });
 
-router.post('/', [check('categoryId', 'Please Select Category')
+router.post('/handleaddproducts', [check('categoryId', 'Please Select Category')
 .isEmpty(),
 check('productName', 'Please Enter Product Name')
 .isEmpty(),
