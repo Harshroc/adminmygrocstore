@@ -9,11 +9,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-// const connectionParams={
-//   useNewUrlParser: true,
-//   useCreateIndex: true,
-//   useUnifiedTopology: true 
-// }
 
 mongoose.connect(url)
     .then( () => {
@@ -23,19 +18,12 @@ mongoose.connect(url)
         console.error(`Error connecting to the database. \n${err}`);
     })
 
-// mongoose.connect(url)
-
-const contt = mongoose.connection;
-
-contt.on('open', () => {
-  console.log("Connected");
-})
-
 var indexRouter = require('./routes/index');
 var categoriesRouter = require('./routes/categories');
 var productsRouter = require('./routes/products');
 var usersRouter = require('./api/routes/users');
 var getCategoriesRouter = require('./api/routes/categories');
+var getProductsRouter = require('./api/routes/products');
 
 var app = express();
 
@@ -73,6 +61,7 @@ app.use((req, res, next) => {
 
 app.use('/users', usersRouter);
 app.use('/api/getcategories', getCategoriesRouter);
+app.use('/api/getproducts', getProductsRouter);
 
 
 // catch 404 and forward to error handler
