@@ -16,12 +16,12 @@ const usersSchema = new mongoose.Schema({
         type: String,
         required : [true, "Please enter password"]
     },
-    userCreatedTime: {
-        type: Date,
-        default: Date.now
-    },
 
-});
+}, 
+{
+    timestamps: true
+}
+);
 
 const usersModel = mongoose.model('Users', usersSchema);
 
