@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 
+const random = Math.random().toString(26).slice(2);
+
 const usersOrdersSchema = new mongoose.Schema({
     
     userOrderId: {
         type: String,
-        default: shortid.generate,
+        default: random,
     },
     orderUserId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -18,10 +20,8 @@ const usersOrdersSchema = new mongoose.Schema({
     },
     orderProducts: [{
         _id: mongoose.Schema.Types.ObjectId,
-        ref: "Products",
         title: String,
         count: Number,
-        required: [true],
     }],
     orderAmount: {
         type: Number,
@@ -40,7 +40,10 @@ const usersOrdersSchema = new mongoose.Schema({
         type: String,
         required: [true],
     },
-
+    orderContactNumber: {
+        type: Number,
+        required: [true],
+    },
 },
 {
     timestamps: true
