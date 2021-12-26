@@ -33,6 +33,8 @@ exports.place_order = async (req, res, next) => {
         }
       };
 
+      console.log(orders);
+
         await address.save().then(
             result => {     
 
@@ -52,10 +54,12 @@ exports.place_order = async (req, res, next) => {
                     }
                 ).catch(err => {
                     res.status(500).json(err);
+                    console.log(err);
                 })
             }
         ).catch(err => {
             res.status(500).json({"error": err});
+            console.log(err);
         })
 
       

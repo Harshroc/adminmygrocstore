@@ -46,12 +46,16 @@
             </li>
 
             <li class="sub-menu">
-                <a href="javascript:;">
+              <% if(url === "orders" || url === "listorders") { %> 
+                <a href="javascript:;" class="active">
+                  <%} else { %>
+                <a href="javascript:;">                  
+                    <% } %>
                   <i class="fa fa-desktop"></i>
                   <span>Orders</span>
                   </a>
                 <ul class="sub">
-                  <li><a href="/vieworders">View Orders</a></li>                  
+                  <li><a href="/listorders">View Orders</a></li>                  
                 </ul>
               </li>
            

@@ -25,6 +25,7 @@ var usersRouter = require('./api/routes/users');
 var getCategoriesRouter = require('./api/routes/categories');
 var getProductsRouter = require('./api/routes/products');
 var ordersRouter = require('./api/routes/orders');
+var adminOrdersRouter = require('./routes/orders');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/categories', categoriesRouter);
 app.use('/products', productsRouter);
+app.use('/orders', adminOrdersRouter);
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
