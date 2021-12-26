@@ -8,6 +8,9 @@ const url = 'mongodb+srv://harshroc:0qj9LZRSXiB5tzjw@cluster0.ednoc.mongodb.net/
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
+const { v4:uuidv4} = require('uuid');
+const auth = require('./middleware/authentication')
 
 
 mongoose.connect(url)
@@ -17,15 +20,17 @@ mongoose.connect(url)
     .catch( (err) => {
         console.error(`Error connecting to the database. \n${err}`);
     })
+    
 
 var indexRouter = require('./routes/index');
 var categoriesRouter = require('./routes/categories');
 var productsRouter = require('./routes/products');
-var usersRouter = require('./api/routes/users');
+var apiusersRouter = require('./api/routes/users');
 var getCategoriesRouter = require('./api/routes/categories');
 var getProductsRouter = require('./api/routes/products');
 var ordersRouter = require('./api/routes/orders');
 var adminOrdersRouter = require('./routes/orders');
+var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -34,6 +39,12 @@ app.use(
     extended: true,
   })
 );
+
+app.use(session({
+  secret: uuidv4(),
+  resave: false,
+  saveUninitialized: true
+}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,10 +56,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', indexRouter);
-app.use('/categories', categoriesRouter);
-app.use('/products', productsRouter);
-app.use('/orders', adminOrdersRouter);
+app.use('/categories', auth, categoriesRouter);
+app.use('/products', auth, productsRouter);
+app.use('/orders', auth, adminOrdersRouter);
+app.use('/users', auth, usersRouter);
+app.get('/logout', function(req, res){
+  req.session.destroy(function(){
+     console.log("user logged out.")
+  });
+  res.redirect('/');
+});
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -62,7 +81,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/users', usersRouter);
+app.use('/api/users', apiusersRouter);
 app.use('/api/getcategories', getCategoriesRouter);
 app.use('/api/getproducts', getProductsRouter);
 app.use('/api/orders', ordersRouter);

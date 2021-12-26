@@ -8,6 +8,7 @@
           <ul class="sidebar-menu" id="nav-accordion">
             
             <h3 style="color:white" class="centered">Welcome! Admin</h3>
+            
             <!-- <li class="mt">
               <a href="/dashboard">
                 <i class="fa fa-dashboard"></i>
@@ -46,6 +47,20 @@
             </li>
 
             <li class="sub-menu">
+              <% if(url === "users" || url === "listusers") { %> 
+                <a href="javascript:;" class="active">
+                  <%} else { %>
+                <a href="javascript:;">                  
+                    <% } %>
+                  <i class="fa fa-desktop"></i>
+                  <span>Users</span>
+                  </a>
+                <ul class="sub">
+                  <li><a href="/users">View Users</a></li>                  
+                </ul>
+              </li>
+
+            <li class="sub-menu">
               <% if(url === "orders" || url === "listorders") { %> 
                 <a href="javascript:;" class="active">
                   <%} else { %>
@@ -55,7 +70,7 @@
                   <span>Orders</span>
                   </a>
                 <ul class="sub">
-                  <li><a href="/listorders">View Orders</a></li>                  
+                  <li><a href="/orders">View Orders</a></li>                  
                 </ul>
               </li>
            

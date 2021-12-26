@@ -1,0 +1,55 @@
+<%- include('header', { url: urls })  %>
+
+<%- include('sidebar', { url: urls }) %>
+    
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> Users List</h3>
+        <div class="row mt">
+          <!--  DATE PICKERS -->
+          <div class="col-lg-12">
+            <div class="content-panel">
+                <div class="adv-table" style="padding: 10px 20px 0px 20px;overflow: scroll;">
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Sr. No</th>
+                                <th>User Email</th>
+                                <th>Actions</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <% let i=1; userslist.forEach(function (users) { %>
+                            <tr>
+                                <td><%= i %></td>
+                                <td><%= users.userEmail %></td>                                
+                                <td><a onclick="return confirm('Are you sure?')" href="/users/deleteusers/<%= users._id %>">Delete</a></td>              
+                            </tr>
+                            <% i++ }) %>
+                            
+                            
+                        </tfoot>
+                    </table>
+                </div>
+              </div>            
+            <!-- /form-panel -->
+           
+          </div>
+          <!-- /col-lg-12 -->
+        </div>
+        <!-- /row -->
+        
+        </div>
+        <!-- row -->
+      </section>
+      <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+
+    <%- include('footer', { url: urls }) %>

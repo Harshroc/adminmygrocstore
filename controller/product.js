@@ -60,4 +60,14 @@ exports.addProductAction = async (req, res, next) => {
           });
       };
 
+      exports.delete_product = (req, res, next) => {
+
+        productsModel.remove({_id:{$eq:req.params.id}}).then(
+          req.method = 'GET',
+          res.redirect('/products/listproducts')
+        ).catch((error) => {
+            res.status(500).send(error);
+          });
+      };
+
     

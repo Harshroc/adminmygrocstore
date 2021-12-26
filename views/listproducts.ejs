@@ -39,7 +39,7 @@
                                 <td><img style="height: 100px;width: auto;" src="<%= product.productImage %>" /></td>
                                 <td><%= product.productMrp %></td>
                                 <td><%= product.productRsp %></td>
-                                <td>Update | Delete</td>
+                                <td><a onclick="return confirm('Are you sure?')" href="/products/deleteproduct/<%= product._id %>">Delete</a></td>
                              
                             </tr>
                             <% i++ }) %>
