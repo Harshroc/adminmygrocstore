@@ -39,7 +39,7 @@ exports.place_order = async (req, res, next) => {
             result => {     
 
                 const order = new ordersModel({
-                    orderUserId: "61b63e56ae07ded15ec91aa5",
+                    orderUserId: "61bee4f0b80df34c7480e680",
                     orderAddress : result._id,
                     orderProducts: orders,
                     orderAmount : req.body.order.total,
