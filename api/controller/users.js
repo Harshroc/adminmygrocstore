@@ -77,7 +77,8 @@ exports.adduser = (req, res, next) => {
                     );
                     return res.status(200).json({
                         message : 'Authentication Successful',
-                        token : token
+                        token : token,
+                        userid: user[0]._id
                     })
                 }
 
