@@ -97,3 +97,50 @@ exports.adduser = (req, res, next) => {
 
     );
   };
+
+
+  exports.userchangepassword = (req, res, next) => {
+    
+    try
+    {
+        usersModel.find({_id: req.body.userId}).exec().then(user => {
+            if(user.length >= 1)
+            {
+                if(req.body.userPassword.trim() === "")
+                {
+                    return res.status(500).json({
+                        error: "Please provide password"
+                    })
+                }
+                else
+                {
+                    bcrypt.hash(req.body.userPassword, 10, (err, hash) => {
+                        if(err) {
+                            return res.status(500).json({
+                                error: err.message
+                            })
+                        } else {
+                            usersModel.findOneAndUpdate({_id: req.body.userId}, {$set:{userPassword:hash}}, {new: true}).exec().then((result) => 
+                            {
+                                return res.status(200).json({
+                                    message: "Password updated successfully"
+                                })
+                            })                        
+                        }
+                    })
+                }   
+            }
+            else
+            {
+                return res.status(404).json({
+                    message : "User does not exists"
+                })
+                
+            }
+        });
+    }
+    catch(ex)
+    {
+        return next(ex);
+    }
+};

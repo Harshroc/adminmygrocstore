@@ -6,4 +6,6 @@ router.post('/signup' ,usersController.adduser);
 
 router.post("/userlogin" ,usersController.userlogin);
 
+router.post("/changepassword" ,usersController.userchangepassword);
+
 module.exports = router;
