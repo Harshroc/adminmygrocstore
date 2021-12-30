@@ -33,7 +33,7 @@ exports.place_order = async (req, res, next) => {
         }
       };
 
-      console.log(orders);
+      
 
         await address.save().then(
             result => {     
@@ -68,3 +68,12 @@ exports.place_order = async (req, res, next) => {
 } 
 };
 
+exports.get_orders = (req, res, next) => {
+    const userid = req.params.userid;
+    console.log(userid);
+    ordersModel.find({'orderUserId': userid}).exec().then((orders) =>{
+        res.status(200).json(orders);
+      }).catch((error) => {
+        res.status(500).send(error);
+      });
+};

@@ -4,14 +4,13 @@ const jwt = require('jsonwebtoken');
 
 
 exports.adduser = (req, res, next) => {
-    
             try
             {
                 usersModel.find({userEmail: req.body.userEmail}).exec().then(user => {
                     if(user.length >= 1)
                     {
                         return res.status(409).json({
-                            message : "Email already exists"
+                            error : "Email already exists"
                         })
                     }
                     else
@@ -28,12 +27,12 @@ exports.adduser = (req, res, next) => {
                                     userPassword : hash
                                 });
                                 users.save().then(result => {
-                                    console.log(result);
-                                    res.status(201).json({
+                                    
+                                    res.status(201).json({                                        
                                         message: "User Created"
                                     })
                                 } ).catch(err => {
-                                    console.log(err);
+                                    
                                     res.status(500).json({
                                         error : err.message
                                     })
@@ -55,14 +54,14 @@ exports.adduser = (req, res, next) => {
             if(user.length < 1)
             {
                 return res.status(401).json({
-                    message : "Authentication Failed"
+                    error : "Authentication Failed"
                 })
             }
             bcrypt.compare(req.body.userPassword, user[0].userPassword, (err, result) => {
                 if(err)
                 {
                     return res.status(404).json({
-                        message: "Authentication Failed"
+                        error: "Authentication Failed"
                     })
                 }
                 if(result)
@@ -83,13 +82,13 @@ exports.adduser = (req, res, next) => {
                 }
 
                 res.status(404).json({
-                    message: "Authentication Failed"
+                    error: "Authentication Failed"
                 })
 
             })
         }
     ).catch(err => {
-        console.log(err);
+        
         res.status(500).json({
             error : err.message
         })
