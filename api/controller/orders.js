@@ -71,9 +71,21 @@ exports.place_order = async (req, res, next) => {
 exports.get_orders = (req, res, next) => {
     const userid = req.params.userid;
     
-    ordersModel.find({'orderUserId': userid}).select('_id userOrderId createdAt orderAmount orderPaymentMethod orderStatus').exec().then((orders) =>{
+    ordersModel.find({'orderUserId': userid}).populate('orderUserId').exec().then((orders) =>{
         res.status(200).json(orders);
       }).catch((error) => {
         res.status(500).send(error);
       });
 };
+
+exports.cancelOrder = (req, res, next) => {
+
+    ordersModel.findOneAndUpdate({_id: req.params.orderid}, {$set:{orderStatus:"cancelled"}}, {new: true}).exec().then((result) => 
+    {
+        res.status(200).json({message: "Order Cancelled Successfully"});
+    }).catch((error) => {
+        console.log(error);
+      res.status(500).json({error: "Order Id not found"});
+    });
+
+  };

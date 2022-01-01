@@ -8,5 +8,7 @@ router.post('/' ,checkauth, ordersController.place_order);
 
 router.get('/getorders/:userid' ,checkauth, ordersController.get_orders);
 
+router.get('/cancelorder/:orderid' ,checkauth, ordersController.cancelOrder);
+
 module.exports = router;    
     
