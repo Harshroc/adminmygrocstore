@@ -16,7 +16,7 @@ exports.place_order = async (req, res, next) => {
         
         
         const address = await new usersAddressModel({
-            userId: "61b63e56ae07ded15ec91aa5",
+            userId: req.body.userid,
             userAddressType: req.body.userdetails.addressType,
             userAddress: req.body.userdetails.address,
             userAddressCity: req.body.userdetails.addressCity,
@@ -39,7 +39,7 @@ exports.place_order = async (req, res, next) => {
             result => {     
 
                 const order = new ordersModel({
-                    orderUserId: "61bee4f0b80df34c7480e680",
+                    orderUserId: req.body.userid,
                     orderAddress : result._id,
                     orderProducts: orders,
                     orderAmount : req.body.order.total,
@@ -70,8 +70,8 @@ exports.place_order = async (req, res, next) => {
 
 exports.get_orders = (req, res, next) => {
     const userid = req.params.userid;
-    console.log(userid);
-    ordersModel.find({'orderUserId': userid}).exec().then((orders) =>{
+    
+    ordersModel.find({'orderUserId': userid}).select('_id userOrderId createdAt orderAmount orderPaymentMethod orderStatus').exec().then((orders) =>{
         res.status(200).json(orders);
       }).catch((error) => {
         res.status(500).send(error);
