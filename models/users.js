@@ -10,7 +10,8 @@ const usersSchema = new mongoose.Schema({
     },
     userMobile: {
         type: String,
-        required: [true, "Please enter mobile number"]
+        required: [true, "Please enter mobile number"],
+        match : /^\d{10}$/,
     },
     userPassword:{
         type: String,
