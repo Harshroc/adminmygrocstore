@@ -1,6 +1,7 @@
 
 const categoriesModel = require('../models/categories');
 const { validationResult } = require('express-validator');
+const base_url = require('./../util/utilconf');
 
 
 exports.addCategory =  async (req, res, next) => {
@@ -16,7 +17,7 @@ exports.addCategory =  async (req, res, next) => {
             try
             {
                 
-                const filepath = "https://vast-reaches-68978.herokuapp.com/"+req.file.path.split('/').slice(1).join('/');
+                const filepath = base_url+req.file.path.split('/').slice(1).join('/');
                 
                 const categories = new categoriesModel({
                     categoryName : req.body.categoryName,

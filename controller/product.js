@@ -1,5 +1,6 @@
 const categoriesModel = require('../models/categories');
 const productsModel = require('../models/products');
+const base_url = require('./../util/utilconf');
 const { validationResult } = require('express-validator');
 
 exports.addProductAction = async (req, res, next) => {
@@ -14,7 +15,7 @@ exports.addProductAction = async (req, res, next) => {
         {
             try
             {
-                const filepath = "https://vast-reaches-68978.herokuapp.com/"+req.file.path.split('/').slice(1).join('/');
+                const filepath = base_url+req.file.path.split('/').slice(1).join('/');
                 const products = new productsModel({
                     productName : req.body.productName,
                     productDesc : req.body.productDesc,
