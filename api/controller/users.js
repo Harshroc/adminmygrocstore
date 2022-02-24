@@ -1,6 +1,7 @@
 const usersModel = require('../../models/users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const JWT_KEY = require('./../../util/utilconf');
 
 
 exports.adduser = (req, res, next) => {
@@ -69,7 +70,7 @@ exports.adduser = (req, res, next) => {
                     const token = jwt.sign({
                         email: user[0].userEmail,
                         id: user[0]._id
-                    }, process.env.JWT_KEY  , 
+                    }, JWT_KEY , 
                     {
                         expiresIn: "1h"
                     }

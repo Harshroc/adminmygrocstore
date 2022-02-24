@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const JWT_KEY = require('./../../util/utilconf');
 
 module.exports = (req, res, next) => {
     
@@ -13,7 +14,7 @@ module.exports = (req, res, next) => {
         else
         {
             const token = req.headers.authorization.split(" ")[1];
-        const decoded = jwt.verify(token, process.env.JWT_KEY);
+        const decoded = jwt.verify(token, JWT_KEY);
         
         req.userData = decoded;
         next();
