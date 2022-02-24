@@ -16,7 +16,7 @@ exports.addCategory =  async (req, res, next) => {
             try
             {
                 
-                const filepath = process.env.base_path+req.file.path.split('/').slice(1).join('/');
+                const filepath = "https://vast-reaches-68978.herokuapp.com/"+req.file.path.split('/').slice(1).join('/');
                 
                 const categories = new categoriesModel({
                     categoryName : req.body.categoryName,
