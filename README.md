@@ -9,7 +9,8 @@ Live demo [_here_](https://mygrocstore.herokuapp.com/)
 
 Demo Details - 
 
-Username - harshroc@gmail.com / 
+Username - harshroc@gmail.com 
+ 
 Password - admin@123
 
 ## Features
