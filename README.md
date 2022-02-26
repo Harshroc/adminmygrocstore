@@ -39,7 +39,7 @@ Project uses commitizen for commit rules and guidelines
 
 ## Resources
 
-<a href="https://drive.google.com/file/d/1ptZ6xdF6dliTyXPCT2w5qyZVbsc8RTw1/view?usp=sharing">High Level Design</a>\
+<a href="https://drive.google.com/file/d/1ptZ6xdF6dliTyXPCT2w5qyZVbsc8RTw1/view?usp=sharing">High Level Design</a>
 
 <a href="https://drive.google.com/file/d/1I754-2dh5xaSYEbkO3JOovXPTG4z37fa/view"> Wireframes</a>
 
