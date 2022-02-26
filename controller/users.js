@@ -11,27 +11,35 @@ if(!req.body.adminemail || !req.body.adminpassword){
 else
 {
     adminUsersModel.find({userEmail : req.body.adminemail}).exec().then(
-    user => {
+    user => { 
+
         if(user.length < 1)
         {    
             res.render('login', {
                 message: "User Email not found"});
         }
-
-        bcrypt.compare(req.body.adminpassword, user[0].userPassword, (err, result) => {
-        if(err)
+        else
         {
-            res.render('login', {
-                message: "Authentication failed"});
+          bcrypt.compare(req.body.adminpassword, user[0].userPassword, (err, result) => {
+            if(err)
+            {
+                res.render('login', {
+                    message: "Authentication failed"});
+            }
+            else if(result)
+            {
+                req.session.user = user[0].userEmail;
+                res.redirect('/categories');
+            }
+            else
+            {
+                res.render('login', {
+                message: "Authentication Failed"});
+            }
+            
+            })
         }
-        else if(result)
-        {
-            req.session.user = user[0].userEmail;
-            res.redirect('/categories');
-        }
-        // res.render('login', {
-        //     message: "Authentication Failed"});
-        })
+      
     }
     ).catch(err => {
         console.log(err);
