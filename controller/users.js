@@ -24,13 +24,13 @@ else
             res.render('login', {
                 message: "Authentication failed"});
         }
-        if(result)
+        else if(result)
         {
             req.session.user = user[0].userEmail;
             res.redirect('/categories');
         }
-        res.render('login', {
-            message: "Authentication Failed"});
+        // res.render('login', {
+        //     message: "Authentication Failed"});
         })
     }
     ).catch(err => {
