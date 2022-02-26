@@ -1,4 +1,5 @@
- const base_url = "https://vast-reaches-68978.herokuapp.com/";
+//  const base_url = "https://vast-reaches-68978.herokuapp.com/";
+ const base_url = "https://mygrocstore.herokuapp.com/";
 
  const JWT_KEY="secret"; 
 
