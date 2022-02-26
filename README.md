@@ -29,7 +29,7 @@ Live demo [_here_](https://mygrocstore.herokuapp.com/)
 
 ![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
 
-![Frontend Code](https://github.com/Harshroc/mygrocstore)
+[Frontend Code](https://github.com/Harshroc/mygrocstore)
 
 
 ## Setup
