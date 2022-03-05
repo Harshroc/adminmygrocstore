@@ -14,7 +14,7 @@
 2. [Features](#features)
 3. [Installation](#Installation)
 4. [Technology Stack](#technology-stack)
-5. [Other Libraries/Platforms Used](#Other-Libraries-Platforms-Used)
+5. [Other Libraries/Platforms Used](#other-librariesplatforms-used)
 6. [Authors](#authors)
 7. [License](#license)
 
